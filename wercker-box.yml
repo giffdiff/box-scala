@@ -1,9 +1,9 @@
 name: scala
-version: 0.1.4
+version: 0.1.5
 type: main
 os: ubuntu@12.04
 env:
-  SBT_OPTS: -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M
+  SBT_OPTS: -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=512M -XX:MaxPermSize=1024M
   IVY_CACHE_DIR: '"$WERCKER_CACHE_DIR/ivy"'
 script: |-
   sudo apt-get update
@@ -14,9 +14,9 @@ script: |-
   echo debconf shared/accepted-oracle-license-v1-1 seen true |  sudo debconf-set-selections
   sudo apt-get install oracle-java7-installer -qq
 
-  sudo wget http://www.scala-lang.org/downloads/distrib/files/scala-2.10.2.tgz
-  tar zxvf scala-2.10.2.tgz
-  sudo mv scala-2.10.2 /usr/share/scala
+  sudo wget http://www.scala-lang.org/files/archive/scala-2.10.3.tgz
+  tar zxvf scala-2.10.3.tgz
+  sudo mv scala-2.10.3 /usr/share/scala
 
   sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
   sudo ln -s /usr/share/scala/bin/scalac /usr/bin/scalac
@@ -26,7 +26,7 @@ script: |-
   sudo ln -s /usr/share/scala/bin/scaladoc /usr/bin/scaladoc
   sudo ln -s /usr/share/scala/bin/scalap /usr/bin/scalap
 
-  wget http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch//0.12.3/sbt-launch.jar
+  wget http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch//0.13.1/sbt-launch.jar
   printf 'java -Dsbt.ivy.home=${IVY_CACHE_DIR} -Xmx512M ${SBT_OPTS} -jar `dirname $0`/sbt-launch.jar "$@"' > sbt
   sudo chmod +x ./sbt
   sudo mv sbt /usr/share/sbt

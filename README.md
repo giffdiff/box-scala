@@ -2,6 +2,7 @@ box-scala
 =========
 
 A Scala box for wercker packed with SBT
+Runs scala 2.10.3 with SBT 0.13.1
 
 status on wercker:
 
